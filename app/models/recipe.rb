@@ -3,14 +3,11 @@ class Recipe
 
   default_options.update(verify: false) # Turn off SSL verification
   
-  key_value = "67d929f333d411596b63e7c79fea3382"
-  hostport = "www.food2fork.com"
-
-  ENV['FOOD2FORK_KEY'] = key_value
-  ENV['FOOD2FORK_SERVER_AND_PORT'] = hostport
+  ENV['FOOD2FORK_KEY'] = "67d929f333d411596b63e7c79fea3382"
+  hostport = ENV['FOOD2FORK_SERVER_AND_PORT'] || 'www.food2fork.com'
 
   base_uri "http://#{hostport}/api/search"
-  default_params key: "67d929f333d411596b63e7c79fea3382"
+  default_params key: ENV['FOOD2FORK_KEY']
   format :json
 
   def self.for term
